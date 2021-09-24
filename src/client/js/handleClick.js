@@ -21,7 +21,7 @@ function handleClick() {
         alert("Please enter date values that is today or later.")
     }
     else {
-        callGeo(cityInput, dateInput);
+        callGeo(cityInput, dateInput, (new Date(dateInput).getTime() - new Date(date).getTime())/86400000);
     }
 
     

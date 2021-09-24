@@ -1,4 +1,4 @@
-async function callGeo(city, date) {
+async function callGeo(city, date, days_away) {
 
     console.log("::: Inside callGeoAPI :::");
 
@@ -11,7 +11,8 @@ async function callGeo(city, date) {
                 'latitude': res.geonames[0].lat,
                 'longitude': res.geonames[0].lng,
                 'country': res.geonames[0].name,
-                'date': date
+                'date': date,
+                'days_away': days_away
             }
 
             postData('http://localhost:8081/postGeoData', data);
@@ -67,10 +68,17 @@ const updateUI = async() => {
     const response = await fetch('http://localhost:8081/retrieveGeoData');
     try {
         const allData = await response.json();
-        document.getElementById('latitude').innerHTML = "Latitude:" + allData.latitude;
-        document.getElementById('longitude').innerHTML = "Longitude:" + allData.longitude;
-        document.getElementById('country').innerHTML = "Country:" + allData.country;
-        document.getElementById('departure').innerHTML = "Departure date:" + allData.date;
+        document.getElementById('latitude').innerHTML = "Latitude: " + allData.latitude;
+        document.getElementById('longitude').innerHTML = "Longitude: " + allData.longitude;
+        document.getElementById('country').innerHTML = "Country: " + allData.country;
+        document.getElementById('departure').innerHTML = "Departure date: " + allData.date;
+        if (allData.days_away>1) {
+            document.getElementById('days_away').innerHTML = "Days left: " + allData.days_away + " days left.";
+        }
+        else {
+            document.getElementById('days_away').innerHTML = "Days left: " + allData.days_away + " day left.";
+        }
+        
     } catch(error) {
         console.log('error', error);
     }
