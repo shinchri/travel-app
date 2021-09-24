@@ -1,6 +1,7 @@
 // Setup empty js object to act as endpoint for all routes
 var geoData = {};
 var weatherData = {};
+var pictureData = {};
 
 var path = require('path')
 
@@ -42,8 +43,10 @@ app.get('/retrieveWeatherData', (req, res) => {
     res.send(weatherData);
 })
 
-// Returns the weatherData
-// app.get('/retrieveWeatherData', ())
+// Returns the pictureData
+app.get('/retrievePictureData', (req, res) => {
+    res.send(pictureData);
+})
 
 // Post route to add incoming data to geoData
 app.post('/postGeoData', (req, res) => {
@@ -58,10 +61,20 @@ app.post('/postWeatherData', (req, res) => {
     console.log(weatherData);
 })
 
+// Post route to add incoming picture data to pictureData
+app.post('/postPictureData', (req, res)=> {
+    pictureData = req.body;
+    console.log(pictureData);
+})
+
 app.get('/getUserName', (req, res) => {
     res.send({"user_name": process.env.USER_NAME});
 })
 
 app.get('/getWeatherKey', (req, res) => {
     res.send({"weather_key": process.env.WEATHER_KEY})
+})
+
+app.get('/getPixabayKey', (req, res) => {
+    res.send({"pixabay_key": process.env.PIXABAY_KEY})
 })

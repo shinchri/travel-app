@@ -59,15 +59,35 @@ async function callGeo(city, date, days_away) {
                     return data;
                 })
                 .then(function(data) {
+                    getPictureKey('http://localhost:8081/getPixabayKey')
+                    .then(function(res) {
+                        getPictureRequest('https://pixabay.com/api/', res.pixabay_key, city)
+                        .then(function(res) {
+                            console.log(res.hits[0].webformatURL);
+                            let url;
+                            if(!res.hits[0].webformatURL) {
+                                url = '';
+                            }
+                            else {
+                                url = res.hits[0].webformatURL;
+                            }
+                            const data = {
+                                'url': url,
+                                'tag': res.hits[0].tags
+                            }
+
+                            postPictureData('http://localhost:8081/postPictureData', data)
+
+                        })
+                    })
+                })
+                .then(function(data) {
                     updateGeoUI();
                     updateWeatherUI();
+                    updatePictureUI();
                 })
             })
         })
-        // .then(function(data) {
-        //     updateGeoUI();
-        //     updateWeatherUI();
-        // })
     })
 }
 
@@ -93,6 +113,16 @@ const getWeatherRequest = async(baseURL='', key='', lat='', lon='')=> {
     }
 }
 
+const getPictureRequest = async(baseURL='', key='', q='') => {
+    const res = await fetch(baseURL+'?key='+key+'%q='+q);
+    try {
+        const data = await res.json();
+        return data;
+    }catch(error) {
+        console.log("error", error);
+    }
+}
+
 const getUserName = async(baseURL='')=> {
     const res = await fetch(baseURL);
     try {
@@ -109,6 +139,16 @@ const getWeatherKey = async(baseURL='') => {
         const data = await res.json();
         return data
     } catch(error) {
+        console.log("error", error);
+    }
+}
+
+const getPictureKey = async(baseURL='') => {
+    const res = await fetch(baseURL);
+    try {
+        const data = await res.json();
+        return data;
+    } catch (error) {
         console.log("error", error);
     }
 }
@@ -152,6 +192,25 @@ const postWeatherData = async(baseURL = '', data={}) => {
     }
 }
 
+const postPictureData = async(baseURL = '', data={}) => {
+    const response = await fetch(baseURL, {
+        method: "POST",
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+    console.log('response is: ' + response);
+
+    try {
+        const newData = await response.json();
+    } catch(error) {
+        console.log('error', error);
+    }
+}
+
 const updateGeoUI = async() => {
     const response = await fetch('http://localhost:8081/retrieveGeoData');
     try {
@@ -191,6 +250,17 @@ const updateWeatherUI = async() => {
         
     }catch(error) {
         console.log("error", error);
+    }
+}
+
+const updatePictureUI = async() => {
+    const response = await fetch('http://localhost:8081/retrievePictureData');
+    try {
+        const allData = await response.json();
+        document.getElementById('picture').innerHTML = "<img src='"+allData.url +"' alt='"+ allData.tag +"'>";
+
+    }catch(error) {
+        console.log('error', error);
     }
 }
 
