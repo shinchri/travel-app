@@ -10,7 +10,8 @@ async function callGeo(city, date) {
             const data = {
                 'latitude': res.geonames[0].lat,
                 'longitude': res.geonames[0].lng,
-                'country': res.geonames[0].name
+                'country': res.geonames[0].name,
+                'date': date
             }
 
             postData('http://localhost:8081/postGeoData', data);
@@ -66,9 +67,10 @@ const updateUI = async() => {
     const response = await fetch('http://localhost:8081/retrieveGeoData');
     try {
         const allData = await response.json();
-        document.getElementById('latitude').innerHTML = allData.latitude;
-        document.getElementById('longitude').innerHTML = allData.longitude;
-        document.getElementById('country').innerHTML = allData.country;
+        document.getElementById('latitude').innerHTML = "Latitude:" + allData.latitude;
+        document.getElementById('longitude').innerHTML = "Longitude:" + allData.longitude;
+        document.getElementById('country').innerHTML = "Country:" + allData.country;
+        document.getElementById('departure').innerHTML = "Departure date:" + allData.date;
     } catch(error) {
         console.log('error', error);
     }
