@@ -1,4 +1,4 @@
-async function callGeo(city) {
+async function callGeo(city, date) {
 
     console.log("::: Inside callGeoAPI :::");
 
