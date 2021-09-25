@@ -85,9 +85,17 @@ async function callGeo(city, date, days_away) {
                     updateWeatherUI();
                     updatePictureUI();
                 })
+                .catch(error => {
+                    console.log("error", error);
+                })
             })
         })
     })
+    .catch(error => {
+        console.log("error", error);
+    })
+
+    return "Geo API Called";
 }
 
 
