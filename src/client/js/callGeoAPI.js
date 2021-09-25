@@ -62,6 +62,7 @@ async function callGeo(city, date, days_away) {
                     .then(function(res) {
                         getPictureRequest('https://pixabay.com/api/', res.pixabay_key, city)
                         .then(function(res) {
+                            console.log(res);
                             let url;
                             if(!res.hits[0].webformatURL) {
                                 url = '';
@@ -112,7 +113,7 @@ const getWeatherRequest = async(baseURL='', key='', lat='', lon='')=> {
 }
 
 const getPictureRequest = async(baseURL='', key='', q='') => {
-    const res = await fetch(baseURL+'?key='+key+'%q='+q);
+    const res = await fetch(baseURL+'?key='+key+'&image_type=photo&q='+q);
     try {
         const data = await res.json();
         return data;
