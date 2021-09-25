@@ -35,7 +35,7 @@ All the dependencies are listed in the "package.json" file. How to install them 
 
 ---
 
-**Step 1: Create .env file **
+**Step 1: Create .env file**
 First You need to create ```.env``` file inside the project root.
 Inside you need to create the following:
 ```
@@ -50,7 +50,7 @@ The ```WEATHER_KEY``` is from [Weatherbit](https://www.weatherbit.io/account/cre
 
 The ```PIXABAY_KEY``` is from [Pixabay](https://pixabay.com/api/docs/).
 
-**Step 2: Install Dependencies **
+**Step 2: Install Dependencies**
 
 In the terminal, ```cd``` into the project folder(.../travel-app):
 
@@ -59,7 +59,7 @@ $ npm install
 
 ```
 
-**Step 3: Start server **
+**Step 3: Start server**
 
 Open two terminal, in one:
 ```bash
