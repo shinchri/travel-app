@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-        <title>Weather Journal</title>
-        <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div id = "app">
-            <div class ="holder headline">
-                <h1>Travel Planner</h1>
-            </div>
-            <div class ="holder city">
-                <label for="city">Enter City here</label>
-                <input type="text" id="city" placeholder="enter city here">
-            </div>
-            <div class ="holder feel">
-                <label for="departure-date">The departure date</label>
-                <input type="date" id="departure-date" required pattern="\d{4}-\d{2}-\d{2}" placeholder="yyyy-mm-dd"/>
-                <button id="generate" type = "submit" onclick="return Client.handleClick()"> Generate </button>
-            </div>
-            <div class ="holder entry">
-                <div class = "title">Most Recent Entry</div>
-                <div id = "entryHolder">
-                    <div id = "latitude"></div> 
-                    <div id = "longitude"></div>
-                    <div id = "country"></div>
-                    <div id = "departure"></div>
-                    <div id = "days_away"></div>
-                    <div id = "temp"></div>
-                    <div id = "description"></div>
-                    <div id = "picture"></div>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header box">
+            <h1 class="title">Travel Planner</h1>
+        </header>
+
+        <div id="picture" class="picture box">
+            
+        </div>
+
+        <div class="post box">
+            <div class="form">
+                <div class ="holder city">
+                    <label for="city">My trip to:</label>
+                    <input type="text" id="city" placeholder="enter city here">
+                </div>
+                <div class ="holder depart">
+                    <label for="departure-date">Departing:</label>
+                    <input type="date" id="departure-date" required pattern="\d{4}-\d{2}-\d{2}" placeholder="yyyy-mm-dd"/>
+                </div>
+                <div class="button">
+                    <button id="generate" type = "submit" onclick="return Client.handleClick()"> Save Trip </button>
+                    <button id="remove" type = "submit"> Remove Trip </button>
                 </div>
             </div>
+            <div class="info">
+                <div>Paris, France is 220 days away.</div>
+                <h2 class="text">Typical weather for then is:</h2>
+                <div id="temp"></div>
+                <div id="description"></div>
+            </div>
+            
         </div>
-        <script>
         
-            // Check that service workers are supported
-            if ('serviceWorker' in navigator) {
-                // Use the window load event to keep the page load performant
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/service-worker.js');
-                });
-            }
-            </script>
+        <footer class="footer box">
 
-    </body>
+        </footer>
+    </div>
+</body>
 </html>

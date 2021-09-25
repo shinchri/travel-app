@@ -1,0 +1,17 @@
+@media (min-width: 700px){
+    .container {
+        display: grid;
+        grid-template-columns: 300px 300px;
+        grid-template-rows: 100px 300px auto;
+        grid-template-areas:
+        "hd hd"
+        "pc main"
+        "ft ft";
+
+    }
+    .post {
+        font-size: 20px;
+    }
+
+}
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+        <title>Weather Journal</title>
+        <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id = "app">
+            <div class ="holder headline">
+                <h1>Travel Planner</h1>
+            </div>
+            <div class ="holder city">
+                <label for="city">Enter City here</label>
+                <input type="text" id="city" placeholder="enter city here">
+            </div>
+            <div class ="holder feel">
+                <label for="departure-date">The departure date</label>
+                <input type="date" id="departure-date" required pattern="\d{4}-\d{2}-\d{2}" placeholder="yyyy-mm-dd"/>
+                <button id="generate" type = "submit" onclick="return Client.handleClick()"> Generate </button>
+            </div>
+            <div class ="holder entry">
+                <div class = "title">Most Recent Entry</div>
+                <div id = "entryHolder">
+                    <div id = "latitude"></div> 
+                    <div id = "longitude"></div>
+                    <div id = "country"></div>
+                    <div id = "departure"></div>
+                    <div id = "days_away"></div>
+                    <div id = "temp"></div>
+                    <div id = "description"></div>
+                    <div id = "picture"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+        
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+            </script>
+
+    </body>
+</html>

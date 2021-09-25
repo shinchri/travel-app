@@ -257,7 +257,7 @@ const updatePictureUI = async() => {
     const response = await fetch('http://localhost:8081/retrievePictureData');
     try {
         const allData = await response.json();
-        document.getElementById('picture').innerHTML = "<img src='"+allData.url +"' alt='"+ allData.tag +"'>";
+        document.getElementById('picture').innerHTML = "<img id='pic' src='"+allData.url +"' alt='"+ allData.tag +"'>";
 
     }catch(error) {
         console.log('error', error);
