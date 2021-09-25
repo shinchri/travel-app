@@ -50,21 +50,17 @@ app.get('/retrievePictureData', (req, res) => {
 
 // Post route to add incoming data to geoData
 app.post('/postGeoData', (req, res) => {
-    // console.log(req.body);
     geoData = req.body;
-    // console.log(geoData);
 })
 
 // Post route to add incoming weather data to weatherData
 app.post('/postWeatherData', (req, res) => {
     weatherData = req.body;
-    console.log(weatherData);
 })
 
 // Post route to add incoming picture data to pictureData
 app.post('/postPictureData', (req, res)=> {
     pictureData = req.body;
-    console.log(pictureData);
 })
 
 app.get('/getUserName', (req, res) => {

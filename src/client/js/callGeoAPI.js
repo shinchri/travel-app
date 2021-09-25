@@ -62,7 +62,6 @@ async function callGeo(city, date, days_away) {
                     .then(function(res) {
                         getPictureRequest('https://pixabay.com/api/', res.pixabay_key, city)
                         .then(function(res) {
-
                             let url;
                             if(!res.hits[0].webformatURL) {
                                 url = '';
