@@ -10,6 +10,7 @@
   - [Requirements](#requirements)
   - [Dependencies](#dependencies)
   - [To Run Project](#to-run-project)
+  - [Test Using Jest](#test-using-jest)
 
 ## Project Description
 
@@ -76,3 +77,10 @@ $ npm run start
 
 The above starts the server on port 8081.
 
+## Test Using Jest
+
+Test can be ran using the following command in the terminal in project root folder:
+
+```bash
+$ npm run test
+```
