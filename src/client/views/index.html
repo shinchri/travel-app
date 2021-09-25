@@ -32,7 +32,8 @@
                 </div>
             </div>
             <div class="info">
-                <div>Paris, France is 220 days away.</div>
+                <div id="departing"></div>
+                <div id="travel-info"></div>
                 <h2 class="text">Typical weather for then is:</h2>
                 <div id="temp"></div>
                 <div id="description"></div>
@@ -43,6 +44,16 @@
         <footer class="footer box">
 
         </footer>
+        <script>
+        
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+        </script>
     </div>
 </body>
 </html>

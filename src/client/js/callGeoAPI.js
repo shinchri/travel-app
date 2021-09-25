@@ -9,7 +9,7 @@ async function callGeo(city, date, days_away) {
             const data = {
                 'latitude': res.geonames[0].lat,
                 'longitude': res.geonames[0].lng,
-                'country': res.geonames[0].name,
+                'country': res.geonames[0].countryName,
                 'date': date,
                 'days_away': days_away
             }
@@ -31,7 +31,6 @@ async function callGeo(city, date, days_away) {
                 
                 getWeatherRequest(baseURL, res.weather_key, data.latitude, data.longitude)
                 .then(function(res) {
-                    console.log(res);
                     let data;
                     if(res.data.length == 1) {
                         data = {
@@ -63,7 +62,7 @@ async function callGeo(city, date, days_away) {
                     .then(function(res) {
                         getPictureRequest('https://pixabay.com/api/', res.pixabay_key, city)
                         .then(function(res) {
-                            console.log(res.hits[0].webformatURL);
+
                             let url;
                             if(!res.hits[0].webformatURL) {
                                 url = '';
@@ -82,7 +81,7 @@ async function callGeo(city, date, days_away) {
                     })
                 })
                 .then(function(data) {
-                    updateGeoUI();
+                    updateGeoUI(city);
                     updateWeatherUI();
                     updatePictureUI();
                 })
@@ -164,8 +163,6 @@ const postData = async(baseURL = '', data={}) => {
         body: JSON.stringify(data)
     });
 
-    console.log("response is: " + response);
-
     try {
         const newData = await response.json();
     } catch(error) {
@@ -182,8 +179,6 @@ const postWeatherData = async(baseURL = '', data={}) => {
         },
         body: JSON.stringify(data)
     });
-
-    console.log('response is: ' + response);
 
     try {
         const newData = await response.json();
@@ -202,8 +197,6 @@ const postPictureData = async(baseURL = '', data={}) => {
         body: JSON.stringify(data)
     })
 
-    console.log('response is: ' + response);
-
     try {
         const newData = await response.json();
     } catch(error) {
@@ -211,20 +204,24 @@ const postPictureData = async(baseURL = '', data={}) => {
     }
 }
 
-const updateGeoUI = async() => {
+const updateGeoUI = async(city) => {
     const response = await fetch('http://localhost:8081/retrieveGeoData');
     try {
         const allData = await response.json();
-        document.getElementById('latitude').innerHTML = "Latitude: " + allData.latitude;
-        document.getElementById('longitude').innerHTML = "Longitude: " + allData.longitude;
-        document.getElementById('country').innerHTML = "Country: " + allData.country;
-        document.getElementById('departure').innerHTML = "Departure date: " + allData.date;
+        const country = allData.country;
+        let days_left = allData.days_away;
+        const departure_day = allData.date;
         if (allData.days_away>1) {
-            document.getElementById('days_away').innerHTML = "Days left: " + allData.days_away + " days left.";
+            days_left = allData.days_away + " days away.";
         }
         else {
-            document.getElementById('days_away').innerHTML = "Days left: " + allData.days_away + " day left.";
+            days_left = allData.days_away + " day away.";
         }
+
+        const info = document.getElementById('travel-info');
+        info.innerHTML = city + ", " + country + " is " + days_left;
+
+        document.getElementById("departing").innerHTML = "Departing on: " + departure_day; 
         
     } catch(error) {
         console.log('error', error);
