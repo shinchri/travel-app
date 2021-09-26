@@ -11,6 +11,7 @@
   - [Dependencies](#dependencies)
   - [To Run Project](#to-run-project)
   - [Test Using Jest](#test-using-jest)
+  - [Extend Your Project](#extend-your-project)
 
 ## Project Description
 
@@ -84,3 +85,10 @@ Test can be ran using the following command in the terminal in project root fold
 ```bash
 $ npm run test
 ```
+
+## Extend Your Project
+
+Feature implemented:
+
+- Allow the user to remove the trip.
+  - When user clicks "Remove Trip" button, the trip information gets emptied 
