@@ -91,4 +91,4 @@ $ npm run test
 Feature implemented:
 
 - Allow the user to remove the trip.
-  - When user clicks "Remove Trip" button, the trip information gets emptied 
+  - When user clicks "Remove Trip" button, the trip information gets emptied.
