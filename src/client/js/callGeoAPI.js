@@ -83,7 +83,7 @@ async function callGeo(city, date, days_away) {
                 .then(function(data) {
                     updateGeoUI(city);
                     updateWeatherUI();
-                    updatePictureUI();
+                    await updatePictureUI();
                 })
                 .catch(error => {
                     console.log("error", error);
